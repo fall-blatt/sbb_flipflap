@@ -57,7 +57,11 @@ void SBB_Module::setPosition(int pos, int countdown, int delayAfter, long clock)
     _triggerTime = clock+countdown;
     int duration = rotationDuration(_position,_targetPosition);
     _endRotationTime = _triggerTime + duration;
+  
     _endDelayTime = _endRotationTime + delayAfter;
+    if(delayAfter<0){
+        _endRotationTime += delayAfter;
+    }
     _mode = MODE_WAITING;
     if(countdown == 0){
         _mode = MODE_TRIGGER;
