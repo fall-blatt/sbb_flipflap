@@ -35,7 +35,7 @@ class SBB_FlipFlap
 
 
 
-    void randomizeAll( int delayBetween = 0,  int delayAfter = ,  int countdown = 0);
+    void randomizeAll( int delayBetween = 0,  int delayAfter = 0,  int countdown = 0);
     void setPositions(int p[], int pSize, int delayBetween, int m = 0, int delayAfter = 0, int countdown = 0);
     void stepAll(int stepSize = 1, int delayBetween = 0, int delayAfter = 0, int countdown = 0);
     void zeroAll(int delayBetween = 0, int delayAfter = 0, int countdown = 0);
