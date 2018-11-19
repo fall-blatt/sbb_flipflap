@@ -24,6 +24,8 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "SBB_FlipFlap", "index.html", [
+    [ "SBB_FlipFlap", "md___users_eliashodel__documents__arduino_libraries__s_b_b__flip_flap_readme.html", null ],
+    [ "To Do", "md___users_eliashodel__documents__arduino_libraries__s_b_b__flip_flap_todo.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ]
