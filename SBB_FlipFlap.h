@@ -31,7 +31,7 @@ class SBB_FlipFlap
     //MULTIPLE MODULE FUNCTIONS
     void setWord(String w, int delayBetween = 0, int m = 0, int numModules = -1,  int delayAfter = 0, int countdown = 0);
 
-    void setText(String text, int part, bool lineBreak, int delayBetween, int m, int numModules, int countdown, int delayAfter);
+    void setText(String &text, int &indexLetter, bool lineBreak = false, int delayBetween = 0, int m = 0, int numModules = -1, int delayAfter = 0, int countdown = 0);
 
 
 

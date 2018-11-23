@@ -186,20 +186,38 @@ void SBB_FlipFlap::setWord(String w,  int delayBetween, int m, int numModules, i
 }
 
 
-void SBB_FlipFlap::setText(String text, int part, bool lineBreak, int delayBetween,  int m, int numModules, int delayAfter, int countdown){
-    int textLength = text.length();
-
-    String subString = text.substring(part*numModules,(part+1)*numModules);
-    //String subString = text.substring(0,18);
-    setWord(subString, m,numModules,delayBetween,countdown,delayAfter);
+void SBB_FlipFlap::setText(String &text, int &indexLetter, bool lineBreak, int delayBetween,  int m, int numModules, int delayAfter, int countdown){
     
-    int nextPart = part+1;
-    
-    if(nextPart*numModules>textLength){
-        nextPart = 0;
+    if(numModules < 0){
+        numModules = _numModules;
     }
-    
-    
+    int nextIndex = indexLetter + numModules;
+    int textLength = text.length();
+    if (nextIndex > textLength) {
+      nextIndex = textLength;
+    }
+     bool spaceFound = false;
+   
+    if(lineBreak){
+        if (text.charAt(nextIndex) != ' ' && nextIndex < textLength) {
+          int nextSpace = findSpace(text, nextIndex - 1, indexLetter);
+          if (nextSpace > indexLetter) {
+            nextIndex = nextSpace;
+            spaceFound = true;
+          } else {
+          }
+        } else {
+          spaceFound = true;
+        }
+    }
+    String subString = text.substring(indexLetter, nextIndex);
+
+    setWord(subString,delayBetween,m,numModules,delayAfter,countdown);
+    indexLetter = nextIndex;
+    if (spaceFound) indexLetter++;
+    if (nextIndex >= textLength - 1) {
+      indexLetter = 0;
+    } 
 }
 
   
@@ -405,6 +423,15 @@ void SBB_FlipFlap::brk() {
   Serial.begin(BAUD_RATE);
 }
 
+
+int SBB_FlipFlap::findSpace(String &s, int pos, int index) {
+  if (s.charAt(pos) == ' ' || pos <= index) {
+    return pos;
+  } else {
+    return findSpace(s,pos - 1, index);
+  }
+
+}
 
 /********************************************
 
