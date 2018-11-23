@@ -99,7 +99,6 @@ class SBB_FlipFlap
     
     SBB_Module *_modules;
 
-    int DEFAULT_COUNTDOWN = 0;
     int DEFAULT_DELAYAFTER = 100;
     const int BAUD_RATE = 19200;
     const byte CMD_POSITION = 0xc0;
@@ -120,7 +119,6 @@ const int MODULE_ALPHANUM = 1;
 const int MODULE_HOUR = 2;
 const int MODULE_MINUTE = 3;
 
-const int DELAY_BETWEEN_SEND = 10;
 
 
 

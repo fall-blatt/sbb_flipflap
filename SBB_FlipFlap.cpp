@@ -347,6 +347,16 @@ bool SBB_FlipFlap::isOpen(int m, int num) {
 }
 
 
+  /********************************************
+
+  SETTER
+
+**********************************************/
+    void SBB_FlipFlap::calibrateDelayBetweenSend(int del){
+        if(del>=0){
+        DELAY_BETWEEN_SEND = del;
+        }
+    }
 
 
 /********************************************
