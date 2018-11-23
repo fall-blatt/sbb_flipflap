@@ -2,8 +2,8 @@
 
 ## Code
 - Cleanup fillRow() parameter order
-- fillText() implementation
 - change all "Strings" to "strings" or char arrays
+- When using serial communication, allow the user to specify any Stream object, rather than hard-coding "Serial". This will make your library compatible all serial ports on Mega and the Due, and can also use alternate interfaces like SoftwareSerial. The Stream object can be passed to your library's constructor or to a begin() function (as a reference, not a pointer).
 
 ## Read Me
 
