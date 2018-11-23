@@ -65,7 +65,8 @@ class SBB_FlipFlap
     bool isOpen(int m);
     bool isOpen(int m, int num);
 
-
+    //SETTER
+    void calibrateDelayBetweenSend(int del);
 
     //HELPER FUNCTIONS
 
@@ -77,6 +78,8 @@ class SBB_FlipFlap
     void startCommand(byte cmd, int addr);
     void setAddress(int addr);
     void sendValue(int val);
+    
+    int findSpace(String &s, int pos, int index);
 
     // LOOKUP FUNCTIONS
     int valueToPosition(char l, int m);
@@ -99,13 +102,15 @@ class SBB_FlipFlap
     
     SBB_Module *_modules;
 
-    int DEFAULT_DELAYAFTER = 100;
+
+    int DELAY_BETWEEN_SEND = 3;
     const int BAUD_RATE = 19200;
     const byte CMD_POSITION = 0xc0;
     const byte CMD_ZERO = 0xc5;
     const byte CMD_STEP = 0xc6;
     const byte CMD_PULSE = 0xc7;
     const byte CMD_CHANGE_ADDR = 0xce;
+    
     
 };
 
@@ -114,10 +119,11 @@ const int FORWARD = 1;
 const int BACKWARD = -1;
 
 const int MODULE_OTHER_40 = 0;
-const int MODULE_OTHER_62 = 0;
-const int MODULE_ALPHANUM = 1;
-const int MODULE_HOUR = 2;
-const int MODULE_MINUTE = 3;
+const int MODULE_OTHER_62 = 1;
+const int MODULE_ALPHANUM = 2;
+const int MODULE_HOUR = 3;
+const int MODULE_MINUTE = 4;
+
 
 
 
