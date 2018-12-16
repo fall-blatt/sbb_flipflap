@@ -125,8 +125,8 @@ void SBB_FlipFlap::setPosition(int p, int m, int delayAfter, int countdown) {
 void SBB_FlipFlap::setValue(int val, int m, int delayAfter, int countdown) {
   if (_modules[m].isOpen()) {
     //lookup Value depending on Module Type
-    int pos = valueToPosition(val,m);
-      setPosition(pos, m, countdown, delayAfter);
+    int pos = valueToPosition(val, m);
+    setPosition(pos, m, countdown, delayAfter);
 
   }
 }
@@ -135,8 +135,8 @@ void SBB_FlipFlap::setValue(int val, int m, int delayAfter, int countdown) {
 void SBB_FlipFlap::setValue(char val, int m, int delayAfter, int countdown) {
   if (_modules[m].isOpen()) {
     //lookup Value depending on Module Type
-      int pos = valueToPosition(val,m);
-      setPosition(pos, m, countdown, delayAfter);
+    int pos = valueToPosition(val, m);
+    setPosition(pos, m, countdown, delayAfter);
 
   }
 }
@@ -148,15 +148,15 @@ void SBB_FlipFlap::step(int stepSize, int m, int delayAfter, int countdown) {
 }
 
 
-  void SBB_FlipFlap::randomize(int m, int delayAfter, int countdown){
-    int pos = floor(random(_modules[m].numPositions()));
-    setPosition(pos,m,countdown,delayAfter);
-  }
+void SBB_FlipFlap::randomize(int m, int delayAfter, int countdown) {
+  int pos = floor(random(_modules[m].numPositions()));
+  setPosition(pos, m, countdown, delayAfter);
+}
 
 
-  void SBB_FlipFlap::zero(int m, int delayAfter, int countdown){
-    setPosition(0,m,countdown,delayAfter);
-  }
+void SBB_FlipFlap::zero(int m, int delayAfter, int countdown) {
+  setPosition(0, m, countdown, delayAfter);
+}
 
 
 
@@ -166,172 +166,211 @@ void SBB_FlipFlap::step(int stepSize, int m, int delayAfter, int countdown) {
 
 ********************************************/
 
-  
-void SBB_FlipFlap::setWord(String w,  int delayBetween, int m, int numModules, int delayAfter,int countdown) {
-    int worldLength = w.length();
-    int addrLength = numModules;
-    if(addrLength == -1){
-        addrLength = _numModules;
+
+void SBB_FlipFlap::setWord(String w,  int delayBetween, int m, int numModules, int delayAfter, int countdown) {
+  int worldLength = w.length();
+  int addrLength = numModules;
+  if (addrLength == -1) {
+    addrLength = _numModules;
+  }
+
+  for (int i = 0; i < addrLength; i++) {
+    if (worldLength > i) {
+      setValue(w.charAt(i), i + m, countdown + i * delayBetween, delayAfter);
+    } else {
+      char filler = ' ';
+      setValue(filler, i + m, countdown + i * delayBetween, delayAfter);
     }
 
-    for (int i = 0; i < addrLength; i++) {
-        if (worldLength > i) {
-            setValue(w.charAt(i),i+m,countdown+i*delayBetween,delayAfter);
-        } else {
-            char filler = ' ';
-            setValue(filler,i+m,countdown+i*delayBetween,delayAfter);
-        }
+  }
+}
 
+void SBB_FlipFlap::setWordTimed(String w,  int delayBetween, int m, int numModules, int delayAfter, int countdown) {
+  int wordLength = w.length();
+  int addrLength = numModules;
+  if (addrLength == -1) {
+    addrLength = _numModules;
+  }
+
+
+  //find module that has to move the longest
+  int longestDuration = 0;
+  int longestDurationModule = 0;
+  for (int i = 0; i < addrLength; i++) {
+    char target = ' ';
+    if (wordLength > i) {
+      target = w.charAt(i);
     }
+    int duration = getDuration(i, target);
+    if (duration > longestDuration) {
+      longestDuration = duration;
+      longestDurationModule = i;
+    }
+
+  }
+
+
+  for (int i = 0; i < addrLength; i++) {
+    char target = ' ';
+    if (wordLength > i) {
+      target = w.charAt(i);
+    }
+    int duration = getDuration(i, target);
+
+    int startTime = countdown + i * delayBetween + longestDuration - duration;
+
+    setValue(target, i + m, startTime, delayAfter);
+
+
+
+  }
 }
 
 
-void SBB_FlipFlap::setText(String &text, int &indexLetter, bool lineBreak, int delayBetween,  int m, int numModules, int delayAfter, int countdown){
-    
-    if(numModules < 0){
-        numModules = _numModules;
-    }
-    int nextIndex = indexLetter + numModules;
-    int textLength = text.length();
-    if (nextIndex > textLength) {
-      nextIndex = textLength;
-    }
-     bool spaceFound = false;
-   
-    if(lineBreak){
-        if (text.charAt(nextIndex) != ' ' && nextIndex < textLength) {
-          int nextSpace = findSpace(text, nextIndex - 1, indexLetter);
-          if (nextSpace > indexLetter) {
-            nextIndex = nextSpace;
-            spaceFound = true;
-          } else {
-          }
-        } else {
-          spaceFound = true;
-        }
-    }
-    String subString = text.substring(indexLetter, nextIndex);
+void SBB_FlipFlap::setText(String &text, int &indexLetter, bool lineBreak, int delayBetween,  int m, int numModules, int delayAfter, int countdown) {
 
-    setWord(subString,delayBetween,m,numModules,delayAfter,countdown);
-    indexLetter = nextIndex;
-    if (spaceFound) indexLetter++;
-    if (nextIndex >= textLength - 1) {
-      indexLetter = 0;
-    } 
+  if (numModules < 0) {
+    numModules = _numModules;
+  }
+  int nextIndex = indexLetter + numModules;
+  int textLength = text.length();
+  if (nextIndex > textLength) {
+    nextIndex = textLength;
+  }
+  bool spaceFound = false;
+
+  if (lineBreak) {
+    if (text.charAt(nextIndex) != ' ' && nextIndex < textLength) {
+      int nextSpace = findSpace(text, nextIndex - 1, indexLetter);
+      if (nextSpace > indexLetter) {
+        nextIndex = nextSpace;
+        spaceFound = true;
+      } else {
+      }
+    } else {
+      spaceFound = true;
+    }
+  }
+  String subString = text.substring(indexLetter, nextIndex);
+
+  setWord(subString, delayBetween, m, numModules, delayAfter, countdown);
+  indexLetter = nextIndex;
+  if (spaceFound) indexLetter++;
+  if (nextIndex >= textLength - 1) {
+    indexLetter = 0;
+  }
 }
 
-  
+
 void SBB_FlipFlap::randomizeAll( int delayBetween, int delayAfter, int countdown) {
 
-    for (int i = 0; i < _numModules; i++) {
-        int pos = floor(random(_modules[i].numPositions()));
-        setPosition(pos,i,countdown+i*delayBetween,delayAfter);
-    }
+  for (int i = 0; i < _numModules; i++) {
+    int pos = floor(random(_modules[i].numPositions()));
+    setPosition(pos, i, countdown + i * delayBetween, delayAfter);
+  }
 }
 
 
 
-  void SBB_FlipFlap::setPositions(int p[], int pSize, int delayBetween, int m, int delayAfter,int countdown){
-    for(int i = 0; i< pSize ;i++){
-        int index = i+ m;
-        if(index<_numModules){
-            setPosition(p[i],index,countdown+i*delayBetween,delayAfter);
-        }       
+void SBB_FlipFlap::setPositions(int p[], int pSize, int delayBetween, int m, int delayAfter, int countdown) {
+  for (int i = 0; i < pSize ; i++) {
+    int index = i + m;
+    if (index < _numModules) {
+      setPosition(p[i], index, countdown + i * delayBetween, delayAfter);
     }
   }
+}
 
-  void SBB_FlipFlap::stepAll(int stepSize, int delayBetween, int delayAfter, int countdown){
-    for (int i = 0; i < _numModules; i++) {
-        step(stepSize,i,countdown+i*delayBetween,delayAfter);
+void SBB_FlipFlap::stepAll(int stepSize, int delayBetween, int delayAfter, int countdown) {
+  for (int i = 0; i < _numModules; i++) {
+    step(stepSize, i, countdown + i * delayBetween, delayAfter);
+  }
+}
+
+void SBB_FlipFlap::zeroAll(int delayBetween, int delayAfter, int countdown) {
+  for (int i = 0; i < _numModules; i++) {
+    setPosition(0, i, countdown + i * delayBetween, delayAfter);
+  }
+}
+
+void SBB_FlipFlap::zeroAllValue(int delayBetween, int delayAfter, int countdown) {
+  for (int i = 0; i < _numModules; i++) {
+    setValue(0, i, countdown + i * delayBetween, delayAfter);
+  }
+}
+
+
+void SBB_FlipFlap::fillRow(int p, int dir, int delayBetween, int m, int numModules, int delayAfter, int countdown) {
+  if (numModules < 0) {
+    numModules = _numModules;
+  }
+
+  if (dir >= 0) { //FORWARD
+    for (int i = 0; i < num; i++) {
+      if (m + i < _numModules) {
+        setPosition(p, m + i, delayAfter, countdown + i * delayBetween);
+      }
+    }
+  } else {
+    for (int i = 0; i < num; i++) {
+      if (m + i < _numModules) {
+        setPosition(p, m + i, delayAfter, countdown + (num - i)*delayBetween);
+      }
     }
   }
+}
 
-  void SBB_FlipFlap::zeroAll(int delayBetween, int delayAfter, int countdown){
-    for (int i = 0; i < _numModules; i++) {
-        setPosition(0,i,countdown+i*delayBetween,delayAfter);
-    }
-  }
+void SBB_FlipFlap::fillRowForward(int p, int delayBetween, int m, int numModules, int delayAfter, int countdown) {
+  fillRow(p, FORWARD, delayBetween, m, numModules, delayAfter, countdown);
+}
+void SBB_FlipFlap::fillRowBackward(int p, int delayBetween, int m, int numModules, int delayAfter, int countdown) {
+  fillRow(p, BACKWARD, delayBetween, m, numModules, delayAfter, countdown);
+}
 
-    void SBB_FlipFlap::zeroAllValue(int delayBetween, int delayAfter, int countdown){
-    for (int i = 0; i < _numModules; i++) {
-        setValue(0,i,countdown+i*delayBetween,delayAfter);
-    }
-  }
+void SBB_FlipFlap::fillRow(char c, int dir, int delayBetween, int m, int numModules, int delayAfter, int countdown) {
+  int p = valueToPosition(c, m);
+  fillRow(p, dir, delayBetween, m, numModules, delayAfter, countdown);
+}
 
-
-  void SBB_FlipFlap::fillRow(int p, int num, int dir, int m, int delayBetween,int countdown, int delayAfter){
-    if(dir >=0){ //FORWARD
-        for(int i = 0; i<num;i++){
-            if(m + i < _numModules){
-            setPosition(p,m+i,countdown+i*delayBetween,delayAfter);
-            }
-        }
-    } else {
-        for(int i = 0; i<num;i++){
-            if(m + i < _numModules){
-                setPosition(p,m+i,countdown+(num-i)*delayBetween,delayAfter);
-            }
-        }
-    }
-  }
-
-  void SBB_FlipFlap::fillRowForward(int p, int num, int m, int delayBetween,int countdown, int delayAfter){
-    fillRow(p,num,FORWARD,m,delayBetween,countdown,delayAfter);
-  }
-  void SBB_FlipFlap::fillRowBackward(int p, int num, int m, int delayBetween,int countdown, int delayAfter){
-    fillRow(p,num,BACKWARD,m,delayBetween,countdown,delayAfter);
-  }
-
-void SBB_FlipFlap::fillRow(char c, int num, int dir, int m, int delayBetween,int countdown, int delayAfter){
-    if(dir >=0){ //FORWARD
-        for(int i = 0; i<num;i++){
-            if(m + i < _numModules){
-            setValue(c,m+i,countdown+i*delayBetween,delayAfter);
-            }
-        }
-    } else {
-        for(int i = 0; i<num;i++){
-            if(m + i < _numModules){
-                setValue(c,m+i,countdown+(num-i)*delayBetween,delayAfter);
-            }
-        }
-    }
-  }
-
-  void SBB_FlipFlap::fillRowForward(char c, int num, int m, int delayBetween,int countdown, int delayAfter){
-    fillRow(c,num,FORWARD,m,delayBetween,countdown,delayAfter);
-  }
-  void SBB_FlipFlap::fillRowBackward(char c, int num, int m, int delayBetween,int countdown, int delayAfter){
-    fillRow(c,num,BACKWARD,m,delayBetween,countdown,delayAfter);
-  }
+void SBB_FlipFlap::fillRowForward(char c, int delayBetween, int m, int numModules, int delayAfter, int countdown) {
+  fillRow(c, FORWARD, delayBetween, m, numModules, delayAfter, countdown);
+}
+void SBB_FlipFlap::fillRowBackward(char c, int delayBetween, int m, int numModules, int delayAfter, int countdown) {
+  fillRow(c, BACKWARD, delayBetween, m, numModules, delayAfter, countdown);
+}
 
 
-    void SBB_FlipFlap::fillRowStepsize(char c, int flapLetters, int dir, int m, int numModules, int countdown, int delayAfter){
-        int previousLetterPos = _modules[m].position();
-        int nextLetter = c;
-        int nextLetterPos = valueToPosition(c,m);
-        int del = _modules[m].rotationDuration(previousLetterPos,nextLetterPos);
-        del = floor(del/(float)flapLetters);
-        fillRow(c,numModules,dir,m,del,countdown,delayAfter);
-    }
 
 
-  /********************************************
+void SBB_FlipFlap::fillRowStepsize(int p, int flapLetters, int dir, int m, int numModules, int countdown, int delayAfter) {
+  int del = getDuration(m, p);
+  del = floor(del / (float)flapLetters);
+  fillRow(p, dir, del, m , numModules, delayAfter, countdown);
+}
+
+void SBB_FlipFlap::fillRowStepsize(char c, int dir, int flapLetters, int m, int numModules, int delayAfter, int countdown) {
+  int nextLetterPos = valueToPosition(c, m);
+
+  fillRowStepsize(nextLetterPos, flapLetters, dir, m, numModules, countdown, delayAfter);
+}
+
+
+/********************************************
 
   OTHER FUNCTIONS
 
 **********************************************/
 
-  void SBB_FlipFlap::changeAddress(int oldAddr, int newAddr){
-    startCommand(CMD_CHANGE_ADDR);
-    setAddress(oldAddr);
-    setAddress(newAddr);
-  }
+void SBB_FlipFlap::changeAddress(int oldAddr, int newAddr) {
+  startCommand(CMD_CHANGE_ADDR);
+  setAddress(oldAddr);
+  setAddress(newAddr);
+}
 
 
 
 
-  /********************************************
+/********************************************
 
   GETTER
 
@@ -365,16 +404,16 @@ bool SBB_FlipFlap::isOpen(int m, int num) {
 }
 
 
-  /********************************************
+/********************************************
 
   SETTER
 
 **********************************************/
-    void SBB_FlipFlap::calibrateDelayBetweenSend(int del){
-        if(del>=0){
-        DELAY_BETWEEN_SEND = del;
-        }
-    }
+void SBB_FlipFlap::calibrateDelayBetweenSend(int del) {
+  if (del >= 0) {
+    DELAY_BETWEEN_SEND = del;
+  }
+}
 
 
 /********************************************
@@ -428,9 +467,24 @@ int SBB_FlipFlap::findSpace(String &s, int pos, int index) {
   if (s.charAt(pos) == ' ' || pos <= index) {
     return pos;
   } else {
-    return findSpace(s,pos - 1, index);
+    return findSpace(s, pos - 1, index);
   }
 
+}
+
+
+int SBB_FlipFlap::getDuration(int indexModule, int targetPos) {
+  int currentPos = _modules[indexModule].position();
+  int duration = _modules[indexModule].rotationDuration(currentPos, targetPos);
+  return duration;
+}
+
+
+int SBB_FlipFlap::getDuration(int indexModule, char targetValue) {
+  int targetPos = valueToPosition(targetValue, indexModule);
+  int currentPos = _modules[indexModule].position();
+  int duration = _modules[indexModule].rotationDuration(currentPos, targetPos);
+  return duration;
 }
 
 /********************************************
@@ -440,29 +494,29 @@ int SBB_FlipFlap::findSpace(String &s, int pos, int index) {
 **********************************************/
 
 
-int SBB_FlipFlap::valueToPosition(char l, int m){
-    int pos = 0;
-    if(_modules[m].moduleType() == MODULE_ALPHANUM){
-        pos = lookupAlphaNum(l);
-    } else if(_modules[m].moduleType() == MODULE_HOUR){
-        pos = lookupHour(l);
-    } else if(_modules[m].moduleType() == MODULE_MINUTE){
-        pos = lookupMinute(l);
-    }
-    return pos;
+int SBB_FlipFlap::valueToPosition(char l, int m) {
+  int pos = 0;
+  if (_modules[m].moduleType() == MODULE_ALPHANUM) {
+    pos = lookupAlphaNum(l);
+  } else if (_modules[m].moduleType() == MODULE_HOUR) {
+    pos = lookupHour(l);
+  } else if (_modules[m].moduleType() == MODULE_MINUTE) {
+    pos = lookupMinute(l);
+  }
+  return pos;
 }
 
 
-int SBB_FlipFlap::valueToPosition(int l, int m){
-    int pos = 0;
-    if(_modules[m].moduleType() == MODULE_ALPHANUM){
-        pos = lookupAlphaNum(l);
-    } else if(_modules[m].moduleType() == MODULE_HOUR){
-        pos = lookupHour(l);
-    } else if(_modules[m].moduleType() == MODULE_MINUTE){
-        pos = lookupMinute(l);
-    }
-    return pos;
+int SBB_FlipFlap::valueToPosition(int l, int m) {
+  int pos = 0;
+  if (_modules[m].moduleType() == MODULE_ALPHANUM) {
+    pos = lookupAlphaNum(l);
+  } else if (_modules[m].moduleType() == MODULE_HOUR) {
+    pos = lookupHour(l);
+  } else if (_modules[m].moduleType() == MODULE_MINUTE) {
+    pos = lookupMinute(l);
+  }
+  return pos;
 }
 
 int SBB_FlipFlap::lookupAlphaNum(char l) {
@@ -505,9 +559,9 @@ int SBB_FlipFlap::lookupHour(int n) {
 
 int SBB_FlipFlap::lookupHour(char l) {
   int pos = -1;
-if (l >= 48 && l <= 57) {
-        pos = lookupHour(l - 48);
-      }
+  if (l >= 48 && l <= 57) {
+    pos = lookupHour(l - 48);
+  }
   return pos;
 }
 
@@ -524,9 +578,9 @@ int SBB_FlipFlap::lookupMinute(int n) {
 
 int SBB_FlipFlap::lookupMinute(char l) {
   int pos = -1 ;
-   if (l >= 48 && l <= 57) {
-        pos = lookupMinute(l - 48);
-      }
+  if (l >= 48 && l <= 57) {
+    pos = lookupMinute(l - 48);
+  }
   return pos;
 }
 

@@ -33,7 +33,7 @@ class SBB_FlipFlap
 
     void setText(String &text, int &indexLetter, bool lineBreak = false, int delayBetween = 0, int m = 0, int numModules = -1, int delayAfter = 0, int countdown = 0);
 
-
+    void setWordTimed(String w, int delayBetween = 0, int m = 0, int numModules = -1,  int delayAfter = 0, int countdown = 0);
 
     void randomizeAll( int delayBetween = 0,  int delayAfter = 0,  int countdown = 0);
     void setPositions(int p[], int pSize, int delayBetween, int m = 0, int delayAfter = 0, int countdown = 0);
@@ -43,16 +43,19 @@ class SBB_FlipFlap
 
 
 
-    void fillRow(int p, int num, int dir, int m, int delayBetween,int countdown, int delayAfter);
-    void fillRowForward(int p, int num, int m, int delayBetween,int countdown, int delayAfter);
-    void fillRowBackward(int p, int num, int m, int delayBetween,int countdown, int delayAfter);
+    //void fillRow(int p, int num, int dir, int m, int delayBetween,int countdown, int delayAfter);
+    void fillRow(int p, int dir, int delayBetween, int m = 0, int numModules = -1, int delayAfter = 0, int countdown = 0);
+    void fillRowForward(int p, int delayBetween, int m = 0, int numModules = -1, int delayAfter = 0, int countdown = 0);
+    void fillRowBackward(int p, int delayBetween, int m = 0, int numModules = -1, int delayAfter = 0, int countdown = 0);
 
-    void fillRow(char c, int num, int dir, int m, int delayBetween,int countdown, int delayAfter);
-    void fillRowForward(char c, int num, int m, int delayBetween,int countdown, int delayAfter);
-    void fillRowBackward(char c, int num, int m, int delayBetween,int countdown, int delayAfter);
+    void fillRow(char c, int dir, int delayBetween, int m = 0, int numModules = -1, int delayAfter = 0, int countdown = 0);
+    void fillRowForward(char c, int delayBetween, int m = 0, int numModules = -1, int delayAfter = 0, int countdown = 0);
+    void fillRowBackward(char c, int delayBetween, int m = 0, int numModules = -1, int delayAfter = 0, int countdown = 0);
 
+    //void fillRowStepsize(int p, int flapLetters, int dir, int m, int numModules, int countdown, int delayAfter);
+    void fillRowStepsize(int p, int dir, int flapLetters, int m = 0, int numModules = -1, int delayAfter = 0, int countdown = 0);
+    void fillRowStepsize(char c, int dir, int flapLetters, int m = 0, int numModules = -1, int delayAfter = 0, int countdown = 0);
 
-    void fillRowStepsize(char c, int flapLetters, int dir, int m, int numModules, int countdown, int delayAfter);
     //OTHER FUNCTIONS
     void changeAddress(int oldAddr, int newAddr);
 
@@ -80,6 +83,9 @@ class SBB_FlipFlap
     void sendValue(int val);
     
     int findSpace(String &s, int pos, int index);
+    
+    int getDuration(int indexModule, int targetPos);
+    int getDuration(int indexModule, char targetValue);
 
     // LOOKUP FUNCTIONS
     int valueToPosition(char l, int m);
