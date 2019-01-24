@@ -8,6 +8,9 @@ class SBB_FlipFlap
 {
   public:
     //CONSTRUCTORS
+    /** Brief description which ends at this dot. Details follow
+     *  here.
+     */
     SBB_FlipFlap(int txPin, int startAddr, int numModules);
     SBB_FlipFlap(int txPin, int startAddr, int numModules,int moduleType[]);
     SBB_FlipFlap(int txPin, int startAddr, int numModules, int moduleType);
@@ -15,9 +18,14 @@ class SBB_FlipFlap
     //GLOBAL FUNCTIONS
     void initModules(int del = 4000);
     void update();
+    void updateBlock(int _blocksize = 18);
+
 
 
     //SINGLE MODULE FUNCTIONS
+    /** Brief description which ends at this dot. Details follow
+     *  here.
+     */
     void setPosition(int p, int m,  int delayAfter = 0, int countdown = 0);
     void setValue(int val, int m,  int delayAfter = 0,int countdown = 0);
     void setValue(char val, int m, int delayAfter = 0,int countdown = 0 );

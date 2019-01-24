@@ -1,4 +1,5 @@
 var files_dup =
 [
-    [ "Arduino", "dir_a991eec27578c865874ede3d8ec657c2.html", "dir_a991eec27578c865874ede3d8ec657c2" ]
+    [ "SBB_FlipFlap.h", "_s_b_b___flip_flap_8h_source.html", null ],
+    [ "SBB_Module.h", "_s_b_b___module_8h_source.html", null ]
 ];

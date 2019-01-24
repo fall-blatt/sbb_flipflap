@@ -96,8 +96,7 @@ $(document).ready(function(){initNavTree('class_s_b_b___flip_flap.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aed47448c71581277c6d786f09c65d70e"><td class="memItemLeft" align="right" valign="top"><a id="aed47448c71581277c6d786f09c65d70e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SBB_FlipFlap</b> (int txPin, int startAddr, int numModules)</td></tr>
+<tr class="memitem:aed47448c71581277c6d786f09c65d70e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_b_b___flip_flap.html#aed47448c71581277c6d786f09c65d70e">SBB_FlipFlap</a> (int txPin, int startAddr, int numModules)</td></tr>
 <tr class="separator:aed47448c71581277c6d786f09c65d70e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a422734c76bbcaddd7303156b97471b7c"><td class="memItemLeft" align="right" valign="top"><a id="a422734c76bbcaddd7303156b97471b7c"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>SBB_FlipFlap</b> (int txPin, int startAddr, int numModules, int moduleType[])</td></tr>
@@ -111,8 +110,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>initModules</b> (int 
 <tr class="memitem:a26108eae6a082686c50c8e3c5b28ce62"><td class="memItemLeft" align="right" valign="top"><a id="a26108eae6a082686c50c8e3c5b28ce62"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()</td></tr>
 <tr class="separator:a26108eae6a082686c50c8e3c5b28ce62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42ecf4b963e88b866f370a267189df58"><td class="memItemLeft" align="right" valign="top"><a id="a42ecf4b963e88b866f370a267189df58"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setPosition</b> (int p, int m, int delayAfter=0, int countdown=0)</td></tr>
+<tr class="memitem:a9f854d523c4db73cda38c256506a3142"><td class="memItemLeft" align="right" valign="top"><a id="a9f854d523c4db73cda38c256506a3142"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateBlock</b> (int _blocksize=18)</td></tr>
+<tr class="separator:a9f854d523c4db73cda38c256506a3142"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42ecf4b963e88b866f370a267189df58"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_b_b___flip_flap.html#a42ecf4b963e88b866f370a267189df58">setPosition</a> (int p, int m, int delayAfter=0, int countdown=0)</td></tr>
 <tr class="separator:a42ecf4b963e88b866f370a267189df58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aadb01bcc251f78d4cc5feca0a5a5572f"><td class="memItemLeft" align="right" valign="top"><a id="aadb01bcc251f78d4cc5feca0a5a5572f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setValue</b> (int val, int m, int delayAfter=0, int countdown=0)</td></tr>
@@ -132,12 +133,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>zero</b> (int m, int 
 <tr class="memitem:ac846f66ce56e89c0d58086e70c9be55f"><td class="memItemLeft" align="right" valign="top"><a id="ac846f66ce56e89c0d58086e70c9be55f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setWord</b> (String w, int delayBetween=0, int m=0, int numModules=-1, int delayAfter=0, int countdown=0)</td></tr>
 <tr class="separator:ac846f66ce56e89c0d58086e70c9be55f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87e0626e83d99c8f1f2052fbc4bfc4df"><td class="memItemLeft" align="right" valign="top"><a id="a87e0626e83d99c8f1f2052fbc4bfc4df"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setText</b> (String text, int part, bool lineBreak, int delayBetween, int m, int numModules, int countdown, int delayAfter)</td></tr>
-<tr class="separator:a87e0626e83d99c8f1f2052fbc4bfc4df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1715d0e43b2d623999a63e6aab261bc8"><td class="memItemLeft" align="right" valign="top"><a id="a1715d0e43b2d623999a63e6aab261bc8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>randomizeAll</b> (int delayBetween=0, int delayAfter=, int countdown=0)</td></tr>
-<tr class="separator:a1715d0e43b2d623999a63e6aab261bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8c00fdb38f570d2c32d09441264ff48"><td class="memItemLeft" align="right" valign="top"><a id="aa8c00fdb38f570d2c32d09441264ff48"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setText</b> (String &amp;text, int &amp;indexLetter, bool lineBreak=false, int delayBetween=0, int m=0, int numModules=-1, int delayAfter=0, int countdown=0)</td></tr>
+<tr class="separator:aa8c00fdb38f570d2c32d09441264ff48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ee7faf7ed7ff5f11918825577d1132e"><td class="memItemLeft" align="right" valign="top"><a id="a2ee7faf7ed7ff5f11918825577d1132e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setWordTimed</b> (String w, int delayBetween=0, int m=0, int numModules=-1, int delayAfter=0, int countdown=0)</td></tr>
+<tr class="separator:a2ee7faf7ed7ff5f11918825577d1132e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42723f3b7f3ce040943a2b9e2f34ef88"><td class="memItemLeft" align="right" valign="top"><a id="a42723f3b7f3ce040943a2b9e2f34ef88"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>randomizeAll</b> (int delayBetween=0, int delayAfter=0, int countdown=0)</td></tr>
+<tr class="separator:a42723f3b7f3ce040943a2b9e2f34ef88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afae4c418285c99485982c8d129521e80"><td class="memItemLeft" align="right" valign="top"><a id="afae4c418285c99485982c8d129521e80"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setPositions</b> (int p[], int pSize, int delayBetween, int m=0, int delayAfter=0, int countdown=0)</td></tr>
 <tr class="separator:afae4c418285c99485982c8d129521e80"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,27 +154,30 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>zeroAll</b> (int dela
 <tr class="memitem:a699d4fe69b01b4b56bed09ccfbc6b6a1"><td class="memItemLeft" align="right" valign="top"><a id="a699d4fe69b01b4b56bed09ccfbc6b6a1"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>zeroAllValue</b> (int delayBetween=0, int delayAfter=0, int countdown=0)</td></tr>
 <tr class="separator:a699d4fe69b01b4b56bed09ccfbc6b6a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae909f3d2115de8a2782b1fecb37ac1ab"><td class="memItemLeft" align="right" valign="top"><a id="ae909f3d2115de8a2782b1fecb37ac1ab"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>fillRow</b> (int p, int num, int dir, int m, int delayBetween, int countdown, int delayAfter)</td></tr>
-<tr class="separator:ae909f3d2115de8a2782b1fecb37ac1ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36ef0c9c1ca8252bdcce7bbc941d5cc4"><td class="memItemLeft" align="right" valign="top"><a id="a36ef0c9c1ca8252bdcce7bbc941d5cc4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>fillRowForward</b> (int p, int num, int m, int delayBetween, int countdown, int delayAfter)</td></tr>
-<tr class="separator:a36ef0c9c1ca8252bdcce7bbc941d5cc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaacd0bc02e343ccd904fc02923d7a09e"><td class="memItemLeft" align="right" valign="top"><a id="aaacd0bc02e343ccd904fc02923d7a09e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>fillRowBackward</b> (int p, int num, int m, int delayBetween, int countdown, int delayAfter)</td></tr>
-<tr class="separator:aaacd0bc02e343ccd904fc02923d7a09e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d8f1b2f1bed6b4481ad7b654c365395"><td class="memItemLeft" align="right" valign="top"><a id="a7d8f1b2f1bed6b4481ad7b654c365395"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>fillRow</b> (char c, int num, int dir, int m, int delayBetween, int countdown, int delayAfter)</td></tr>
-<tr class="separator:a7d8f1b2f1bed6b4481ad7b654c365395"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0007fe4481518ba06f880839ca8d3cb0"><td class="memItemLeft" align="right" valign="top"><a id="a0007fe4481518ba06f880839ca8d3cb0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>fillRowForward</b> (char c, int num, int m, int delayBetween, int countdown, int delayAfter)</td></tr>
-<tr class="separator:a0007fe4481518ba06f880839ca8d3cb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d5f529afd598bdca4425c1a05be6c54"><td class="memItemLeft" align="right" valign="top"><a id="a8d5f529afd598bdca4425c1a05be6c54"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>fillRowBackward</b> (char c, int num, int m, int delayBetween, int countdown, int delayAfter)</td></tr>
-<tr class="separator:a8d5f529afd598bdca4425c1a05be6c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16898b2d475919355911515d5fa25e05"><td class="memItemLeft" align="right" valign="top"><a id="a16898b2d475919355911515d5fa25e05"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>fillRowStepsize</b> (char c, int flapLetters, int dir, int m, int numModules, int countdown, int delayAfter)</td></tr>
-<tr class="separator:a16898b2d475919355911515d5fa25e05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a9bf83cfd422d1d4109468b56d43624"><td class="memItemLeft" align="right" valign="top"><a id="a5a9bf83cfd422d1d4109468b56d43624"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>fillRow</b> (int p, int dir, int delayBetween, int m=0, int numModules=-1, int delayAfter=0, int countdown=0)</td></tr>
+<tr class="separator:a5a9bf83cfd422d1d4109468b56d43624"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a4df900ab49b7453956a48e08f6d37d"><td class="memItemLeft" align="right" valign="top"><a id="a0a4df900ab49b7453956a48e08f6d37d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>fillRowForward</b> (int p, int delayBetween, int m=0, int numModules=-1, int delayAfter=0, int countdown=0)</td></tr>
+<tr class="separator:a0a4df900ab49b7453956a48e08f6d37d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5b26bbe79e7e5c2d3eb84a3e062e5b6"><td class="memItemLeft" align="right" valign="top"><a id="aa5b26bbe79e7e5c2d3eb84a3e062e5b6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>fillRowBackward</b> (int p, int delayBetween, int m=0, int numModules=-1, int delayAfter=0, int countdown=0)</td></tr>
+<tr class="separator:aa5b26bbe79e7e5c2d3eb84a3e062e5b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24ec7c0167993d7e20a6a6b4111cea91"><td class="memItemLeft" align="right" valign="top"><a id="a24ec7c0167993d7e20a6a6b4111cea91"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>fillRow</b> (char c, int dir, int delayBetween, int m=0, int numModules=-1, int delayAfter=0, int countdown=0)</td></tr>
+<tr class="separator:a24ec7c0167993d7e20a6a6b4111cea91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab370d43d2ccb12bd146449dc32fa702d"><td class="memItemLeft" align="right" valign="top"><a id="ab370d43d2ccb12bd146449dc32fa702d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>fillRowForward</b> (char c, int delayBetween, int m=0, int numModules=-1, int delayAfter=0, int countdown=0)</td></tr>
+<tr class="separator:ab370d43d2ccb12bd146449dc32fa702d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60015ff00c859d069ab0d865601045ec"><td class="memItemLeft" align="right" valign="top"><a id="a60015ff00c859d069ab0d865601045ec"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>fillRowBackward</b> (char c, int delayBetween, int m=0, int numModules=-1, int delayAfter=0, int countdown=0)</td></tr>
+<tr class="separator:a60015ff00c859d069ab0d865601045ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab18a2fb095c28fd06ad5378eb111b97a"><td class="memItemLeft" align="right" valign="top"><a id="ab18a2fb095c28fd06ad5378eb111b97a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>fillRowStepsize</b> (int p, int dir, int flapLetters, int m=0, int numModules=-1, int delayAfter=0, int countdown=0)</td></tr>
+<tr class="separator:ab18a2fb095c28fd06ad5378eb111b97a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10e30aafb58f354fb5fd07b0ac9c43a6"><td class="memItemLeft" align="right" valign="top"><a id="a10e30aafb58f354fb5fd07b0ac9c43a6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>fillRowStepsize</b> (char c, int dir, int flapLetters, int m=0, int numModules=-1, int delayAfter=0, int countdown=0)</td></tr>
+<tr class="separator:a10e30aafb58f354fb5fd07b0ac9c43a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a985fd20fa4e612416b08bcf769173d14"><td class="memItemLeft" align="right" valign="top"><a id="a985fd20fa4e612416b08bcf769173d14"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>changeAddress</b> (int oldAddr, int newAddr)</td></tr>
 <tr class="separator:a985fd20fa4e612416b08bcf769173d14"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -186,6 +193,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isOpen</b> (int m)</t
 <tr class="memitem:a3335ae1a6600fb68fc08476da047f071"><td class="memItemLeft" align="right" valign="top"><a id="a3335ae1a6600fb68fc08476da047f071"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isOpen</b> (int m, int num)</td></tr>
 <tr class="separator:a3335ae1a6600fb68fc08476da047f071"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdd094ff1d32e50ff776fa7b6c7f8d68"><td class="memItemLeft" align="right" valign="top"><a id="afdd094ff1d32e50ff776fa7b6c7f8d68"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>calibrateDelayBetweenSend</b> (int del)</td></tr>
+<tr class="separator:afdd094ff1d32e50ff776fa7b6c7f8d68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae367b9a032f51a9036724f84573d0fcb"><td class="memItemLeft" align="right" valign="top"><a id="ae367b9a032f51a9036724f84573d0fcb"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>sendPosition</b> (int p, int a)</td></tr>
 <tr class="separator:ae367b9a032f51a9036724f84573d0fcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -204,6 +214,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setAddress</b> (int a
 <tr class="memitem:ad67f1f1d333640c68c62515f122e72f4"><td class="memItemLeft" align="right" valign="top"><a id="ad67f1f1d333640c68c62515f122e72f4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>sendValue</b> (int val)</td></tr>
 <tr class="separator:ad67f1f1d333640c68c62515f122e72f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cbccc4fd3693c6a056314268b7eedd4"><td class="memItemLeft" align="right" valign="top"><a id="a3cbccc4fd3693c6a056314268b7eedd4"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>findSpace</b> (String &amp;s, int pos, int index)</td></tr>
+<tr class="separator:a3cbccc4fd3693c6a056314268b7eedd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b9be65ea9610632e486b57da12c2581"><td class="memItemLeft" align="right" valign="top"><a id="a8b9be65ea9610632e486b57da12c2581"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>getDuration</b> (int indexModule, int targetPos)</td></tr>
+<tr class="separator:a8b9be65ea9610632e486b57da12c2581"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa88b67ecc31c168ae1912c7c7cc4c61d"><td class="memItemLeft" align="right" valign="top"><a id="aa88b67ecc31c168ae1912c7c7cc4c61d"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>getDuration</b> (int indexModule, char targetValue)</td></tr>
+<tr class="separator:aa88b67ecc31c168ae1912c7c7cc4c61d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12d80b6823b9937bb8ab9101644e5c88"><td class="memItemLeft" align="right" valign="top"><a id="a12d80b6823b9937bb8ab9101644e5c88"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>valueToPosition</b> (char l, int m)</td></tr>
 <tr class="separator:a12d80b6823b9937bb8ab9101644e5c88"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -229,6 +248,84 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>lookupMinute</b> (int 
 int&#160;</td><td class="memItemRight" valign="bottom"><b>lookupMinute</b> (char l)</td></tr>
 <tr class="separator:ab042386092febdcb266c878430488eea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aed47448c71581277c6d786f09c65d70e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed47448c71581277c6d786f09c65d70e">&#9670;&nbsp;</a></span>SBB_FlipFlap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SBB_FlipFlap::SBB_FlipFlap </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>txPin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>startAddr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numModules</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Brief description which ends at this dot. Details follow here. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a42ecf4b963e88b866f370a267189df58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42ecf4b963e88b866f370a267189df58">&#9670;&nbsp;</a></span>setPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SBB_FlipFlap::setPosition </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>delayAfter</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>countdown</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Brief description which ends at this dot. Details follow here. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/Users/eliashodel/Documents/Arduino/libraries/SBB_FlipFlap/<a class="el" href="_s_b_b___flip_flap_8h_source.html">SBB_FlipFlap.h</a></li>
 <li>/Users/eliashodel/Documents/Arduino/libraries/SBB_FlipFlap/SBB_FlipFlap.cpp</li>
