@@ -109,7 +109,7 @@ class SBB_FlipFlap
     SBB_Module *_modules;
 
 
-    int DELAY_BETWEEN_SEND = 3;
+    int DELAY_BETWEEN_SEND = 10;
     const int BAUD_RATE = 19200;
     const byte CMD_POSITION = 0xc0;
     const byte CMD_ZERO = 0xc5;

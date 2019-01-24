@@ -94,7 +94,33 @@ void SBB_FlipFlap::update() {
       if (!isSending) {
         sendPosition(_modules[i].targetPosition(), _modules[i].address());
       } else {
+        //sendValue(_modules[i].targetPosition());
+       sendPosition(_modules[i].targetPosition(), _modules[i].address());
+      }
+      _modules[i].trigger();
+      isSending = true;
+    } else {
+      isSending = false;
+    }
+  }
+  _clock = millis();
+}
+
+void SBB_FlipFlap::updateBlock(int _blocksize) {
+  _clock = millis();
+    int counter = 0;
+  bool isSending = false;
+  for (int  i = 0; i < _numModules; i++) {
+    _modules[i].updateMode(_clock);
+
+    if (_modules[i].isTrigger()) {
+      if (!isSending || counter<_blocksize) {
+        sendPosition(_modules[i].targetPosition(), _modules[i].address());
+          counter = 0;
+      } else {
         sendValue(_modules[i].targetPosition());
+       //sendPosition(_modules[i].targetPosition(), _modules[i].address());
+          counter++;
       }
       _modules[i].trigger();
       isSending = true;
@@ -306,15 +332,15 @@ void SBB_FlipFlap::fillRow(int p, int dir, int delayBetween, int m, int numModul
   }
 
   if (dir >= 0) { //FORWARD
-    for (int i = 0; i < num; i++) {
+    for (int i = 0; i <  numModules; i++) {
       if (m + i < _numModules) {
         setPosition(p, m + i, delayAfter, countdown + i * delayBetween);
       }
     }
   } else {
-    for (int i = 0; i < num; i++) {
+    for (int i = 0; i <  numModules; i++) {
       if (m + i < _numModules) {
-        setPosition(p, m + i, delayAfter, countdown + (num - i)*delayBetween);
+        setPosition(p, m + i, delayAfter, countdown + (numModules - i)*delayBetween);
       }
     }
   }
