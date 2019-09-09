@@ -11,9 +11,9 @@ class SBB_FlipFlap
     /** Brief description which ends at this dot. Details follow
      *  here.
      */
-    SBB_FlipFlap(int txPin, int startAddr, int numModules);
-    SBB_FlipFlap(int txPin, int startAddr, int numModules,int moduleType[]);
-    SBB_FlipFlap(int txPin, int startAddr, int numModules, int moduleType);
+    SBB_FlipFlap(int txPin, int startAddr, int numModules   ,HardwareSerial& serial = Serial);
+    SBB_FlipFlap(int txPin, int startAddr, int numModules,int moduleType[],HardwareSerial& serial = Serial);
+    SBB_FlipFlap(int txPin, int startAddr, int numModules, int moduleType, HardwareSerial& serial = Serial);
 
     //GLOBAL FUNCTIONS
     void initModules(int del = 4000);
@@ -108,6 +108,8 @@ class SBB_FlipFlap
 
     
   private:
+  
+    HardwareSerial&  serial;
     int _startAddr;
     int _numModules;
     int _txPin;

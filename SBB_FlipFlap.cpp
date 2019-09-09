@@ -8,27 +8,30 @@
 
 ********************************************/
 
-SBB_FlipFlap::SBB_FlipFlap(int txPin, int startAddr, int numModules) {
+SBB_FlipFlap::SBB_FlipFlap(int txPin, int startAddr, int numModules, HardwareSerial&  serial_):serial(serial_) {
   _txPin = txPin;
   _startAddr = startAddr;
   _numModules = numModules;
   _modules = new SBB_Module[_numModules];
+  //serial = serial_;
   for (int i = 0; i < _numModules; i++) {
     //SBB_Module tempModule(_startAddr+i,40);
     _modules[i].init(_startAddr + i, 40, MODULE_ALPHANUM);
   }
 
-  Serial.begin(BAUD_RATE);
+  serial.begin(BAUD_RATE);
 
 }
 
 
 
-SBB_FlipFlap::SBB_FlipFlap(int txPin, int startAddr, int numModules, int moduleType[]) {
+SBB_FlipFlap::SBB_FlipFlap(int txPin, int startAddr, int numModules, int moduleType[],HardwareSerial&  serial_):serial(serial_)  {
   _txPin = txPin;
   _startAddr = startAddr;
   _numModules = numModules;
   _modules = new SBB_Module[_numModules];
+  //serial = serial_;
+
   for (int i = 0; i < _numModules; i++) {
     //SBB_Module tempModule(_startAddr+i,40);
     int numPosTemp = 62;
@@ -41,15 +44,17 @@ SBB_FlipFlap::SBB_FlipFlap(int txPin, int startAddr, int numModules, int moduleT
     _modules[i].init(_startAddr + i, numPosTemp, moduleTypeTemp);
   }
 
-  Serial.begin(BAUD_RATE);
+  serial.begin(BAUD_RATE);
 
 }
 
-SBB_FlipFlap::SBB_FlipFlap(int txPin, int startAddr, int numModules, int moduleType) {
+SBB_FlipFlap::SBB_FlipFlap(int txPin, int startAddr, int numModules, int moduleType,HardwareSerial&  serial_):serial(serial_)  {
   _txPin = txPin;
   _startAddr = startAddr;
   _numModules = numModules;
   _modules = new SBB_Module[_numModules];
+  //serial = serial_;
+
   for (int i = 0; i < _numModules; i++) {
     //SBB_Module tempModule(_startAddr+i,40);
     int numPosTemp = 62;
@@ -62,7 +67,7 @@ SBB_FlipFlap::SBB_FlipFlap(int txPin, int startAddr, int numModules, int moduleT
     _modules[i].init(_startAddr + i, numPosTemp, moduleType);
   }
 
-  Serial.begin(BAUD_RATE);
+  serial.begin(BAUD_RATE);
 
 }
 
@@ -451,41 +456,41 @@ void SBB_FlipFlap::calibrateDelayBetweenSend(int del) {
 
 void SBB_FlipFlap::sendPosition(int p, int a) {
   startCommand(CMD_POSITION, a);
-  Serial.write(p);
+  serial.write(p);
   delay(DELAY_BETWEEN_SEND);
 }
 
 
 void SBB_FlipFlap::startCommand(byte cmd) {
   brk();
-  Serial.write(0xff);
-  Serial.write(cmd);
+  serial.write(0xff);
+  serial.write(cmd);
 }
 
 void SBB_FlipFlap::startCommand(byte cmd, int addr) {
   brk();
-  Serial.write(0xff);
-  Serial.write(cmd);
+  serial.write(0xff);
+  serial.write(cmd);
   setAddress(addr);
 }
 
 void SBB_FlipFlap::setAddress(int addr) {
-  Serial.write(addr);
+  serial.write(addr);
 }
 
 void SBB_FlipFlap::sendValue(int val) {
-  Serial.write(val);
+  serial.write(val);
   delay(DELAY_BETWEEN_SEND);
 
 }
 
 void SBB_FlipFlap::brk() {
-  Serial.flush();
-  Serial.end();
+  serial.flush();
+  serial.end();
   pinMode(_txPin, OUTPUT);
   digitalWrite(_txPin, LOW);
   delay(10);
-  Serial.begin(BAUD_RATE);
+  serial.begin(BAUD_RATE);
 }
 
 
