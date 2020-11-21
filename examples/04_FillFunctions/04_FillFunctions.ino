@@ -1,0 +1,90 @@
+#include <SBB_FlipFlap.h>
+
+//set txPin
+int txPin = 1;
+
+//set lowest addr of module. note: the addresses of the module must be sequential
+int addr = 13;
+
+//set number of Modules
+int numModules = 9;
+
+//set moduleType if all Modules are the same
+//Avaiable Modules:  MODULE_ALPHANUM, MODULE_HOUR, MOUDLE_MINUTE, MODULE_OTHER_40, MODULE_OTHER_62
+int moduleType = MODULE_ALPHANUM;
+
+//set moduleType if modules have different types
+// int[] moduleType = {MODULE_HOUR, MODULE_MINUTE, MODULE_OTHER_42}
+
+//initalize SBB Object
+SBB_FlipFlap sbb(txPin, addr, numModules, moduleType);
+
+int state = 0;
+
+void setup() {
+
+  // IMPORTANT always include before sending commands to modules
+  //this sets all Modules to Position 0,
+  sbb.initModules();
+
+  //IMPORTANT: ALWAYS INCLUDE AT THE END OF setup() AND loop()!
+  //updates all the modules and the clock, send the actual commands to the modules.
+  sbb.update();
+}
+
+void loop() {
+  //Test if all Modules are ready and availabe for new command
+  if (sbb.isOpen()) {
+    if (state == 0) {
+
+      //Fill Row with one position
+      //parameters: position/value, direction, delayBetween, (optional) startmodule, (optional) numModules, (optional) delayAfter, (optional) countdown
+      //first argument can either be the positionIndex or the char to display
+      //direction from which direction the Row should be filled: FORWARD = 1, BACKWARD = -1
+      //numModules = -1 means unlimited/full display. unused modules get set to empty space ' '
+      //if textlenght is limited only the modules in rage get updated, all others stay the same as they were
+
+      sbb.fillRow(5, FORWARD, 200, 0, -1, 500, 0);
+      //sbb.fillRow('e',FORWARD,200,0,-1,500,0);
+
+
+      state = 1;
+    } else if (state == 1) {
+
+      //Fill Row with one position
+      //parameters: position/value, direction, delayBetween, (optional) startmodule, (optional) numModules, (optional) delayAfter, (optional) countdown
+      //first argument can either be the positionIndex or the char to display
+      //direction from which direction the Row should be filled: FORWARD = 1, BACKWARD = -1
+      //numModules = -1 means unlimited/full display. unused modules get set to empty space ' '
+      //if textlenght is limited only the modules in rage get updated, all others stay the same as they were
+
+      sbb.fillRow(25, BACKWARD, 200, 0, -1, 500, 0);
+      //sbb.fillRow('y',BACKWARD,200,0,-1,500,0);
+
+
+      state = 2;
+    } else if (state == 2) {
+      //Fill Row with one position
+      //parameters: position/value, direction, flapLetters, (optional) startmodule, (optional) numModules, (optional) delayAfter, (optional) countdown
+      //first argument can either be the positionIndex or the char to display
+      //direction from which direction the Row should be filled: FORWARD = 1, BACKWARD = -1
+      //flapLetters set the number of Modules that should be rotating simultaneously. (The needed delayBetween is calculated automaticly
+      //numModules = -1 means unlimited/full display. unused modules get set to empty space ' '
+      //if textlenght is limited only the modules in rage get updated, all others stay the same as they were
+
+      sbb.fillRowStepsize('/', FORWARD, 3, 0, -1, 500, 0);
+
+      state = 3;
+    }
+    else if (state == 3) {
+
+      sbb.fillRowStepsize('.', BACKWARD, 3, 0, -1, 500, 0);
+
+      state = 0;
+    }
+  }
+
+  //IMPORTANT: ALWAYS INCLUDE AT THE END OF setup() AND loop()!
+  //updates all the modules and the clock, send the actual commands to the modules.
+  sbb.update();
+}
