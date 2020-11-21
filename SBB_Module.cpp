@@ -52,7 +52,7 @@ void SBB_Module::updateMode(long clock){
 
 
 
-void SBB_Module::setPosition(int pos, int countdown, int delayAfter, long clock){
+void SBB_Module::setPosition(int pos,  int delayAfter, int countdown, long clock){
     _targetPosition = pos;
     _triggerTime = clock+countdown;
     int duration = rotationDuration(_position,_targetPosition);

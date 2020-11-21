@@ -16,7 +16,7 @@ class SBB_Module{
     
     
         void setPosition(int pos, long clock);
-        void setPosition(int pos, int countdown,int delayAfter,long clock);
+        void setPosition(int pos, int delayAfter, int countdown ,long clock);
     
     
         //HELPER FUNCTIONS

@@ -148,7 +148,7 @@ void SBB_FlipFlap::updateBlock(int _blocksize) {
 
 void SBB_FlipFlap::setPosition(int p, int m, int delayAfter, int countdown) {
   if (_modules[m].isOpen()) {
-    _modules[m].setPosition(p, countdown, delayAfter, _clock);
+    _modules[m].setPosition(p, delayAfter, countdown, _clock);
   }
 }
 
@@ -157,7 +157,7 @@ void SBB_FlipFlap::setValue(int val, int m, int delayAfter, int countdown) {
   if (_modules[m].isOpen()) {
     //lookup Value depending on Module Type
     int pos = valueToPosition(val, m);
-    setPosition(pos, m, countdown, delayAfter);
+    setPosition(pos, m, delayAfter, countdown);
 
   }
 }
@@ -167,7 +167,7 @@ void SBB_FlipFlap::setValue(char val, int m, int delayAfter, int countdown) {
   if (_modules[m].isOpen()) {
     //lookup Value depending on Module Type
     int pos = valueToPosition(val, m);
-    setPosition(pos, m, countdown, delayAfter);
+    setPosition(pos, m, delayAfter, countdown);
 
   }
 }
@@ -175,18 +175,18 @@ void SBB_FlipFlap::setValue(char val, int m, int delayAfter, int countdown) {
 
 void SBB_FlipFlap::step(int stepSize, int m, int delayAfter, int countdown) {
   int pos = (_modules[m].position() + stepSize) % _modules[m].numPositions();
-  setPosition(pos, m, countdown, delayAfter);
+  setPosition(pos, m, delayAfter, countdown);
 }
 
 
 void SBB_FlipFlap::randomize(int m, int delayAfter, int countdown) {
   int pos = floor(random(_modules[m].numPositions()));
-  setPosition(pos, m, countdown, delayAfter);
+  setPosition(pos, m, delayAfter, countdown);
 }
 
 
 void SBB_FlipFlap::zero(int m, int delayAfter, int countdown) {
-  setPosition(0, m, countdown, delayAfter);
+  setPosition(0, m, delayAfter, countdown);
 }
 
 
@@ -207,10 +207,10 @@ void SBB_FlipFlap::setWord(String w,  int delayBetween, int m, int numModules, i
 
   for (int i = 0; i < addrLength; i++) {
     if (worldLength > i) {
-      setValue(w.charAt(i), i + m, countdown + i * delayBetween, delayAfter);
+      setValue(w.charAt(i), i + m, delayAfter, countdown + i * delayBetween);
     } else {
       char filler = ' ';
-      setValue(filler, i + m, countdown + i * delayBetween, delayAfter);
+      setValue(filler, i + m, delayAfter, countdown + i * delayBetween);
     }
 
   }
@@ -250,7 +250,7 @@ void SBB_FlipFlap::setWordTimed(String w,  int delayBetween, int m, int numModul
 
     int startTime = countdown + i * delayBetween + longestDuration - duration;
 
-    setValue(target, i + m, startTime, delayAfter);
+    setValue(target, i + m, delayAfter, startTime);
 
 
 
@@ -297,7 +297,7 @@ void SBB_FlipFlap::randomizeAll( int delayBetween, int delayAfter, int countdown
 
   for (int i = 0; i < _numModules; i++) {
     int pos = floor(random(_modules[i].numPositions()));
-    setPosition(pos, i, countdown + i * delayBetween, delayAfter);
+    setPosition(pos, i, delayAfter, countdown + i * delayBetween);
   }
 }
 
@@ -307,26 +307,26 @@ void SBB_FlipFlap::setPositions(int p[], int pSize, int delayBetween, int m, int
   for (int i = 0; i < pSize ; i++) {
     int index = i + m;
     if (index < _numModules) {
-      setPosition(p[i], index, countdown + i * delayBetween, delayAfter);
+      setPosition(p[i], index, delayAfter, countdown + i * delayBetween);
     }
   }
 }
 
 void SBB_FlipFlap::stepAll(int stepSize, int delayBetween, int delayAfter, int countdown) {
   for (int i = 0; i < _numModules; i++) {
-    step(stepSize, i, countdown + i * delayBetween, delayAfter);
+    step(stepSize, i, delayAfter, countdown + i * delayBetween);
   }
 }
 
 void SBB_FlipFlap::zeroAll(int delayBetween, int delayAfter, int countdown) {
   for (int i = 0; i < _numModules; i++) {
-    setPosition(0, i, countdown + i * delayBetween, delayAfter);
+    setPosition(0, i, delayAfter, countdown + i * delayBetween);
   }
 }
 
 void SBB_FlipFlap::zeroAllValue(int delayBetween, int delayAfter, int countdown) {
   for (int i = 0; i < _numModules; i++) {
-    setValue(0, i, countdown + i * delayBetween, delayAfter);
+    setValue(0, i, delayAfter, countdown + i * delayBetween);
   }
 }
 
@@ -373,7 +373,7 @@ void SBB_FlipFlap::fillRowBackward(char c, int delayBetween, int m, int numModul
 
 
 
-void SBB_FlipFlap::fillRowStepsize(int p, int flapLetters, int dir, int m, int numModules, int countdown, int delayAfter) {
+void SBB_FlipFlap::fillRowStepsize(int p, int flapLetters, int dir, int m, int numModules, int delayAfter, int countdown) {
   int del = getDuration(m, p);
   del = floor(del / (float)flapLetters);
   fillRow(p, dir, del, m , numModules, delayAfter, countdown);
@@ -382,7 +382,7 @@ void SBB_FlipFlap::fillRowStepsize(int p, int flapLetters, int dir, int m, int n
 void SBB_FlipFlap::fillRowStepsize(char c, int dir, int flapLetters, int m, int numModules, int delayAfter, int countdown) {
   int nextLetterPos = valueToPosition(c, m);
 
-  fillRowStepsize(nextLetterPos, flapLetters, dir, m, numModules, countdown, delayAfter);
+  fillRowStepsize(nextLetterPos, flapLetters, dir, m, numModules, delayAfter, countdown);
 }
 
 
