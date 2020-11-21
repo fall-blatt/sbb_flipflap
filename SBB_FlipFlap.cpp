@@ -99,8 +99,8 @@ void SBB_FlipFlap::update() {
       if (!isSending) {
         sendPosition(_modules[i].targetPosition(), _modules[i].address());
       } else {
-        sendValue(_modules[i].targetPosition());
-       //sendPosition(_modules[i].targetPosition(), _modules[i].address());
+        //sendValue(_modules[i].targetPosition());
+       sendPosition(_modules[i].targetPosition(), _modules[i].address());
       }
       _modules[i].trigger();
       isSending = true;
@@ -157,7 +157,7 @@ void SBB_FlipFlap::setValue(int val, int m, int delayAfter, int countdown) {
   if (_modules[m].isOpen()) {
     //lookup Value depending on Module Type
     int pos = valueToPosition(val, m);
-  setPosition(pos, m, delayAfter,countdown);
+    setPosition(pos, m, countdown, delayAfter);
 
   }
 }
@@ -167,7 +167,7 @@ void SBB_FlipFlap::setValue(char val, int m, int delayAfter, int countdown) {
   if (_modules[m].isOpen()) {
     //lookup Value depending on Module Type
     int pos = valueToPosition(val, m);
-  setPosition(pos, m, delayAfter,countdown);
+    setPosition(pos, m, countdown, delayAfter);
 
   }
 }
@@ -175,18 +175,18 @@ void SBB_FlipFlap::setValue(char val, int m, int delayAfter, int countdown) {
 
 void SBB_FlipFlap::step(int stepSize, int m, int delayAfter, int countdown) {
   int pos = (_modules[m].position() + stepSize) % _modules[m].numPositions();
-  setPosition(pos, m, delayAfter,countdown);
+  setPosition(pos, m, countdown, delayAfter);
 }
 
 
 void SBB_FlipFlap::randomize(int m, int delayAfter, int countdown) {
   int pos = floor(random(_modules[m].numPositions()));
-  setPosition(pos, m, delayAfter,countdown);
+  setPosition(pos, m, countdown, delayAfter);
 }
 
 
 void SBB_FlipFlap::zero(int m, int delayAfter, int countdown) {
-  setPosition(0, m, delayAfter,countdown);
+  setPosition(0, m, countdown, delayAfter);
 }
 
 
