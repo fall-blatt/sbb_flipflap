@@ -7,7 +7,7 @@ class SBB_Module{
     public:
         //CONSTRUCTORS
         SBB_Module();
-        SBB_Module::SBB_Module(int addr, int numPositions, int typeModule);
+        SBB_Module(int addr, int numPositions, int typeModule);
         
         //GLOBAL FUNCTIONS
         void init(int addr, int numPositions, int typeModule);
